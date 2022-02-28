@@ -1,1 +1,1 @@
-mod user_aggregate;
+mod user_address_aggregate;

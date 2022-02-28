@@ -7,7 +7,7 @@ use sqlx::MySqlPool;
 pub struct UserAddressAggregate {}
 
 impl UserAddressAggregate {
-    pub async fn handle_create_user_command(pool: &MySqlPool, user_id: &u64, command: &CreateUserAddressCommand) -> Result<UserAddress> {
+    async fn handle_create_user_address_command(pool: &MySqlPool, user_id: &u64, command: &CreateUserAddressCommand) -> Result<UserAddress> {
         UserAddressWriteRepository::create(pool, user_id, command).await
     }
 }
