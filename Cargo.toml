@@ -1,4 +1,10 @@
 [workspace]
 members = [
+    "rain-aggregates",
     "rain-base",
+    "rain-commands",
+    "rain-model",
+    "rain-projections",
+    "rain-queries",
+    "rain-repository",
 ]
