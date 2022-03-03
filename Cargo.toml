@@ -7,4 +7,5 @@ members = [
     "rain-projections",
     "rain-queries",
     "rain-repository",
+    "rain-web",
 ]

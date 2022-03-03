@@ -1,6 +1,5 @@
 use async_trait::async_trait;
 use sqlx::{MySqlPool};
-use sqlx::mysql::MySqlRow;
 use anyhow::{Context, Result};
 use rain_model::user::{UserAddress};
 use rain_queries::user::{UserAddressByRegionQuery};
@@ -16,7 +15,7 @@ pub trait IUserAddressReadRepository {
 #[async_trait]
 impl IUserAddressReadRepository for UserAddressReadRepository {
     async fn get_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>> {
-        let sql: &str = r#"SELECT * FROM t_user_address WHERE id = ?"#;
+        let sql: &str = r#"SELECT * FROM t_user_address WHERE user_id = ?"#;
         let row: Vec<UserAddress> = sqlx::query_as(sql)
             .bind(&query.user_id)
             .fetch_all(pool)

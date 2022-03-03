@@ -1,0 +1,43 @@
+[package]
+name = "rain-web"
+version = "1.0.0"
+authors = ["rainbing <cnrainbing@163.com>", "Andrey Ermilov <andrerm@ya.ru>", ]
+edition = "2021"
+
+description = """
+    rainbing
+"""
+license = "MIT/Apache-2.0"
+readme = "README.md"
+keywords = ["microservice", "rust", "actix-web", "cqrs", "async"]
+homepage = "https://github.com/cnrainbing"
+repository = "https://github.com/cnrainbing/rain-async-cqrs"
+documentation = "https://docs.rs/cnrainbing"
+categories = ["microservice-and-rust"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rain-base = { path = "../rain-base" }
+rain-commands = { path = "../rain-commands" }
+rain-queries = { path = "../rain-queries" }
+rain-aggregates = { path = "../rain-aggregates" }
+rain-projections = { path = "../rain-projections" }
+
+serde = { version = "1.0.136", features = ["derive"] }
+serde_json = "1.0.79"
+serde-aux = "3.0.1"
+tokio = { version = "1.17.0", features = ["full"] }
+sqlx = { version = "0.5.11", features = ["runtime-tokio-native-tls", "mysql", "chrono", "macros", "uuid", "json", "bigdecimal", "decimal"] }
+async-std = "1.10.0"
+log = "0.4.14"
+log4rs = { version = "1.0.0", features = ["toml_format"] }
+anyhow = "1.0.55"
+config = "0.11.0"
+dotenv = "0.15.0"
+actix-rt = "2.6.0"
+actix-web = "4.0.1"
+lazy_static = "1.4.0"
+async-trait = "0.1.52"
+thiserror = "1.0.30"
+#actix-web-4-validator = "3.2.0"
+validator = { version = "0.14.0", features = ["derive"] }

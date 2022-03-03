@@ -7,7 +7,7 @@ use sqlx::MySqlPool;
 pub struct UserAddressProjection {}
 
 impl UserAddressProjection {
-    async fn handle_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>> {
+    pub async fn handle_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>> {
         UserAddressReadRepository::get_user_address_by_region(pool, query).await
     }
 }
