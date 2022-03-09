@@ -17,6 +17,10 @@ use crate::router::register_all_router::register_all_service;
 /// 工程内部mod
 pub mod config;
 pub mod router;
+pub mod response;
+pub mod constant;
+pub mod enums;
+pub mod error;
 
 /// 全局的 state
 pub struct AppState {

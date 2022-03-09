@@ -8,6 +8,6 @@ pub struct UserAddressProjection {}
 
 impl UserAddressProjection {
     pub async fn handle_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>> {
-        UserAddressReadRepository::get_user_address_by_region(pool, query).await
+        UserAddressReadRepository::fetch_user_address_by_region(pool, query).await
     }
 }

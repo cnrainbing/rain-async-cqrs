@@ -19,6 +19,7 @@ categories = ["microservice-and-rust"]
 [dependencies]
 rain-base = { path = "../rain-base" }
 rain-commands = { path = "../rain-commands" }
+rain-model = { path = "../rain-model" }
 rain-queries = { path = "../rain-queries" }
 rain-aggregates = { path = "../rain-aggregates" }
 rain-projections = { path = "../rain-projections" }
@@ -37,6 +38,7 @@ dotenv = "0.15.0"
 actix-rt = "2.6.0"
 actix-web = "4.0.1"
 lazy_static = "1.4.0"
+regex = "1.5.4"
 async-trait = "0.1.52"
 thiserror = "1.0.30"
 #actix-web-4-validator = "3.2.0"
