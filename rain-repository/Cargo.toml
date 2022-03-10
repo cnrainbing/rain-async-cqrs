@@ -7,6 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rain-base = { path = "../rain-base" }
 rain-model = { path = "../rain-model" }
 rain-commands = { path = "../rain-commands" }
 rain-queries = { path = "../rain-queries" }
@@ -14,3 +15,4 @@ anyhow = "1.0.55"
 async-trait = "0.1.52"
 # tokio + rustls [runtime-async-std-native-tls or runtime-tokio-native-tls or runtime-actix-native-tls]
 sqlx = { version = "0.5.11", features = ["runtime-tokio-native-tls", "mysql", "chrono","macros","uuid","json","bigdecimal","decimal"] }
+log = "0.4.14"

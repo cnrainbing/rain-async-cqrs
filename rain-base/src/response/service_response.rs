@@ -32,11 +32,38 @@ impl<T> ServiceResponse<T> {
         }
     }
 
+    ///
+    /// HttpResponse::Ok().json(ServiceResponse::success(data.unwrap()))
+    ///
     pub fn success(data: T) -> ServiceResponse<T> {
         ServiceResponse {
             code: ErrorCode::OK.as_u32(),
             message: ErrorCode::OK.as_str(),
             data,
+        }
+    }
+
+    pub fn failure_msg_str(code: u32, message: &'static str) -> ServiceResponse<&'static str> {
+        ServiceResponse {
+            code,
+            message,
+            data: "",
+        }
+    }
+
+    pub fn failure_str(error_code: ErrorCode) -> ServiceResponse<&'static str> {
+        ServiceResponse {
+            code: error_code.as_u32(),
+            message: error_code.as_str(),
+            data: "",
+        }
+    }
+
+    pub fn failure_e_msg(error_code: ErrorCode, message: &'static str) -> ServiceResponse<&'static str> {
+        ServiceResponse {
+            code: error_code.as_u32(),
+            message,
+            data: "",
         }
     }
 }

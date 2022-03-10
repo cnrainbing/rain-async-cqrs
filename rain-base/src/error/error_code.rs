@@ -1,9 +1,10 @@
 use std::num::NonZeroU32;
-use anyhow::{Result};
 use std::fmt;
 use std::str::FromStr;
 use std::convert::TryFrom;
 use std::error::Error;
+use actix_web::{HttpResponse, Responder, ResponseError};
+use crate::response::ServiceResponse;
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct ErrorCode(NonZeroU32);
@@ -13,7 +14,7 @@ pub struct InvalidErrorCode {
 }
 
 impl ErrorCode {
-    pub fn from_u32(src: u32) -> Result<ErrorCode, InvalidErrorCode> {
+    pub fn from_u32(src: u32) -> anyhow::Result<ErrorCode, InvalidErrorCode> {
         if src < 1000000 || src >= 9999999 {
             return Err(InvalidErrorCode::new());
         }
@@ -23,7 +24,7 @@ impl ErrorCode {
             .ok_or_else(InvalidErrorCode::new)
     }
 
-    pub fn from_bytes(src: &[u8]) -> Result<ErrorCode, InvalidErrorCode> {
+    pub fn from_bytes(src: &[u8]) -> anyhow::Result<ErrorCode, InvalidErrorCode> {
         if src.len() != 7 {
             return Err(InvalidErrorCode::new());
         }
@@ -60,6 +61,13 @@ impl ErrorCode {
 
     pub fn canonical_reason(&self) -> Option<&'static str> {
         canonical_reason(self.0.get())
+    }
+}
+
+impl ResponseError for ErrorCode {
+    fn error_response(&self) -> HttpResponse {
+        let err_json = ServiceResponse::<&str>::failure_msg_str(self.as_u32(), self.as_str());
+        HttpResponse::Ok().json(err_json)
     }
 }
 
@@ -111,7 +119,7 @@ impl From<ErrorCode> for u32 {
 impl FromStr for ErrorCode {
     type Err = InvalidErrorCode;
 
-    fn from_str(s: &str) -> Result<ErrorCode, InvalidErrorCode> {
+    fn from_str(s: &str) -> anyhow::Result<ErrorCode, InvalidErrorCode> {
         ErrorCode::from_bytes(s.as_ref())
     }
 }
@@ -127,7 +135,7 @@ impl<'a> TryFrom<&'a [u8]> for ErrorCode {
     type Error = InvalidErrorCode;
 
     #[inline]
-    fn try_from(t: &'a [u8]) -> Result<Self, Self::Error> {
+    fn try_from(t: &'a [u8]) -> anyhow::Result<Self, Self::Error> {
         ErrorCode::from_bytes(t)
     }
 }
@@ -136,7 +144,7 @@ impl<'a> TryFrom<&'a str> for ErrorCode {
     type Error = InvalidErrorCode;
 
     #[inline]
-    fn try_from(t: &'a str) -> Result<Self, Self::Error> {
+    fn try_from(t: &'a str) -> anyhow::Result<Self, Self::Error> {
         t.parse()
     }
 }
@@ -145,7 +153,7 @@ impl TryFrom<u32> for ErrorCode {
     type Error = InvalidErrorCode;
 
     #[inline]
-    fn try_from(t: u32) -> Result<Self, Self::Error> {
+    fn try_from(t: u32) -> anyhow::Result<Self, Self::Error> {
         ErrorCode::from_u32(t)
     }
 }
@@ -179,12 +187,17 @@ macro_rules! error_codes {
 error_codes! {
     (0, ERROR, "ERROR");
     (200, OK, "OK");
+    (500, INTERNAL_SERVER_ERROR, "Internal Server Error");
     //用户错误1001000 - 1001999
     (1001000, USER_UID_NOT_FOUND, "用户UID不存在");
-    (1001001, USER_ACCESS_KEY_AUTH_EXC, "用户accessKey授权异常");
+    (1001001, USER_ID_NOT_FOUND, "用户ID不存在");
+    (1001002, USER_ACCESS_KEY_AUTH_EXC, "用户accessKey授权异常");
 
     //订单错误1002000 - 1002999
     (1002000, ORDER_ID_NOT_FOUND, "订单不存在");
+
+    //订单错误1003000 - 1003999
+    (1003000, DB_ERR, "数据库错误");
 }
 
 impl InvalidErrorCode {
