@@ -20,13 +20,12 @@ impl IUserAddressReadRepository for UserAddressReadRepository {
             .bind(&query.user_id)
             .fetch_all(pool)
             .await;
-        Err(ErrorCode::DB_ERR)
-        /*match row {
+        match row {
             Ok(data) => Ok(data),
             Err(e) => {
                 log::debug!("fetch_user_address_by_region -> e:{}",e.as_database_error().unwrap().to_string());
                 Err(ErrorCode::DB_ERR)
             }
-        }*/
+        }
     }
 }

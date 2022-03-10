@@ -7,7 +7,7 @@ use crate::{AppState, Configs};
 use rain_projections::user::UserAddressProjection as Projection;
 use rain_queries::user::{UserAddressByRegionQuery};
 
-#[get("/address/region")]
+#[get("/user/address/region")]
 pub async fn user_address_by_region_router(
     query: web::Query<UserAddressByRegionQuery>,
     ctx: web::Data<Arc<AppState>>,
