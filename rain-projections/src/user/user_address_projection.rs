@@ -3,7 +3,7 @@ use rain_queries::user::{UserAddressByRegionQuery};
 use rain_model::user::{UserAddress};
 use anyhow::{Result};
 use sqlx::MySqlPool;
-use rain_base::error::ErrorCode;
+use rain_core::error::ErrorCode;
 
 pub struct UserAddressProjection {}
 

@@ -1,6 +1,6 @@
 use async_trait::async_trait;
 use sqlx::{Error, MySqlPool};
-use rain_base::error::ErrorCode;
+use rain_core::error::ErrorCode;
 use rain_model::user::{UserAddress};
 use rain_queries::user::{UserAddressByRegionQuery};
 

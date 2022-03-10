@@ -2,6 +2,7 @@
 members = [
     "rain-aggregates",
     "rain-base",
+    "rain-core",
     "rain-commands",
     "rain-model",
     "rain-projections",

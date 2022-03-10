@@ -11,6 +11,7 @@ rain-base = { path = "../rain-base" }
 rain-model = { path = "../rain-model" }
 rain-commands = { path = "../rain-commands" }
 rain-queries = { path = "../rain-queries" }
+rain-core = { path = "../rain-core" }
 anyhow = "1.0.55"
 async-trait = "0.1.52"
 # tokio + rustls [runtime-async-std-native-tls or runtime-tokio-native-tls or runtime-actix-native-tls]

@@ -11,6 +11,7 @@ rain-base = { path = "../rain-base" }
 rain-queries = { path = "../rain-queries" }
 rain-repository = { path = "../rain-repository" }
 rain-model = { path = "../rain-model" }
+rain-core = { path = "../rain-core" }
 anyhow = "1.0.55"
 async-trait = "0.1.52"
 sqlx = { version = "0.5.11", features = ["runtime-tokio-native-tls", "mysql", "chrono","macros","uuid","json","bigdecimal","decimal"] }

@@ -23,6 +23,7 @@ rain-model = { path = "../rain-model" }
 rain-queries = { path = "../rain-queries" }
 rain-aggregates = { path = "../rain-aggregates" }
 rain-projections = { path = "../rain-projections" }
+rain-core = { path = "../rain-core" }
 
 serde = { version = "1.0.136", features = ["derive"] }
 serde_json = "1.0.79"

@@ -1,8 +1,8 @@
 use std::sync::Arc;
 use actix_web::{HttpResponse, web, get};
 use actix_web::web::ServiceConfig;
-use rain_base::error::ErrorCode;
-use rain_base::response::ServiceResponse;
+use rain_core::error::ErrorCode;
+use rain_core::response::ServiceResponse;
 use crate::{AppState, Configs};
 use rain_projections::user::UserAddressProjection as Projection;
 use rain_queries::user::{UserAddressByRegionQuery};
