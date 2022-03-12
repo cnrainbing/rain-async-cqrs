@@ -1,6 +1,7 @@
 use std::sync::Arc;
 use actix_web::{HttpResponse, web, get};
 use actix_web::web::ServiceConfig;
+use anyhow::Result;
 use rain_core::error::ErrorCode;
 use rain_core::response::ServiceResponse;
 use crate::{AppState, Configs};
@@ -11,7 +12,7 @@ use rain_queries::user::{UserAddressByRegionQuery};
 pub async fn user_address_by_region_router(
     query: web::Query<UserAddressByRegionQuery>,
     ctx: web::Data<Arc<AppState>>,
-) -> anyhow::Result<HttpResponse, ErrorCode> {
+) -> Result<HttpResponse, ErrorCode> {
     log::debug!("user_address_by_region -> user_id:{}",query.user_id);
 
     let result = Projection::handle_user_address_by_region(&ctx.pool, &query).await;

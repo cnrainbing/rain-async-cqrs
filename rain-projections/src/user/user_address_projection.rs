@@ -8,7 +8,9 @@ use rain_core::error::ErrorCode;
 pub struct UserAddressProjection {}
 
 impl UserAddressProjection {
-    pub async fn handle_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>, ErrorCode> {
+    pub async fn handle_user_address_by_region(
+        pool: &MySqlPool, query: &UserAddressByRegionQuery,
+    ) -> Result<Vec<UserAddress>, ErrorCode> {
         ReadRepository::fetch_user_address_by_region(pool, query).await
     }
 }

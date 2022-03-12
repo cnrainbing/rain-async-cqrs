@@ -3,7 +3,7 @@ use std::fmt;
 use std::str::FromStr;
 use std::convert::TryFrom;
 use std::error::Error;
-use actix_web::{HttpResponse, Responder, ResponseError};
+use actix_web::{HttpResponse, ResponseError};
 use crate::response::ServiceResponse;
 
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -188,6 +188,7 @@ error_codes! {
     (0, ERROR, "ERROR");
     (200, OK, "OK");
     (500, INTERNAL_SERVER_ERROR, "Internal Server Error");
+
     //用户错误1001000 - 1001999
     (1001000, USER_UID_NOT_FOUND, "用户UID不存在");
     (1001001, USER_ID_NOT_FOUND, "用户ID不存在");
