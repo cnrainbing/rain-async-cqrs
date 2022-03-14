@@ -17,7 +17,7 @@ pub trait IUserAddressReadRepository {
 impl IUserAddressReadRepository for UserAddressReadRepository {
     async fn fetch_user_address_by_region(pool: &MySqlPool, query: &UserAddressByRegionQuery) -> Result<Vec<UserAddress>, ErrorCode> {
         let sql: &str = r#"SELECT * FROM t_user_address WHERE user_id = ?"#;
-        let row: anyhow::Result<Vec<UserAddress>, Error> = sqlx::query_as(sql)
+        let row: Result<Vec<UserAddress>, Error> = sqlx::query_as(sql)
             .bind(&query.user_id)
             .fetch_all(pool)
             .await;

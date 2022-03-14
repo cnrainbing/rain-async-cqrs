@@ -199,6 +199,9 @@ error_codes! {
 
     //订单错误1003000 - 1003999
     (1003000, DB_ERR, "数据库错误");
+
+    //订单错误1004000 - 1004999
+    (1004000, CREATE_USER_ADDRESS_ERR, "创建用户地址失败");
 }
 
 impl InvalidErrorCode {
